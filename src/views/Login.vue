@@ -26,9 +26,6 @@
 </template>
 
 <script>
-    //手动导入自己封装请求的模块，可以使用插件方式引入，避免所有组件都要导入
-    //import {postRequest} from "@/uitls/api";
-
     export default {
         name: "Login",
         data(){
@@ -59,16 +56,22 @@
                         //使用自己封装的请求
                         this.postRequest('/login',this.loginForm).then(resp=>{
                             if(resp){
+
                                 this.loading=false;
                                 const tokenStr = resp.object.tokenHead+resp.object.token;
                                 window.sessionStorage.setItem("tokenStr",tokenStr);
-                                //push,可以回退，replace不能回退
+
                                 let path = this.$route.query.redirect;
-                                this.$router.replace((path=='/' || path==undefined) ?'/home':path);
+                                console.log(path);
+                                this.$router.replace((path==='/' || path===undefined) ? '/home':path).catch(() => true);
                             }
+                        }).catch(()=>{
+
+                            this.loading=false;
                         })
                     } else {
                         this.loading=true;
+
                         this.$message.error('请输入所有字段');
                         return false;
                     }

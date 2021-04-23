@@ -8,8 +8,8 @@
            <el-button type="primary" icon="el-icon-plus">添加角色</el-button>
         </div>
         <div class="promissmain">
-            <el-collapse  accordion>
-                <el-collapse-item :title="r.namezh" :name="r.id" v-for="(r,index) in roles" :key="index">
+            <el-collapse  accordion @click="change">
+                <el-collapse-item :title="item.nameZh" :name="item.id" v-for="(item,index) in roles" :key="index">
                     <el-card class="box-card">
                         <div slot="header" class="clearfix">
                             <span>可访问资源</span>
@@ -32,13 +32,13 @@
             return{
                 role:{
                     name:"",
-                    namezh:''
+                    namezh:""
                 },
                 roles:[],
                 allMenus:[],
                 defaultProps:{
-                    label:"name",
-                    children:"children"
+                    children:"children",
+                    label:"name"
                 }
             }
         },
@@ -54,6 +54,18 @@
                 })
 
             },
+            initAllMenus(){
+                this.getRequest('').then(resp=>{
+                    if(resp){
+                        this.allMenus = resp;
+                    }
+                })
+            },
+            change(rid){
+                if(rid){
+                    this.initAllMenus();
+                }
+            }
 
         }
     }

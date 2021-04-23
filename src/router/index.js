@@ -3,7 +3,6 @@ import VueRouter from "vue-router"
 import Login from "../views/Login"
 
 Vue.use(VueRouter)
-//这routes不能名其他名
 const routes = [
     {
         path:"/",

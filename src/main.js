@@ -20,6 +20,7 @@ Vue.prototype.putRequest=putRequest;
 Vue.prototype.getRequest=getRequest;
 Vue.prototype.deleteRequest=deleteRequest;
 
+
 //路由跳转之前回调（前置守卫）beforeEach,afterEach全局守卫,还有路由独享守卫（当我们进入到某个路由里面的时候就可以单独写一个路由独享守卫）和组件内的守卫
 router.beforeEach((to,from,next) => {
   if(window.sessionStorage.getItem("tokenStr")){

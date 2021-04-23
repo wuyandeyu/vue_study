@@ -43,8 +43,8 @@ export const deleteRequest=(url,parms)=>{
 
 //响应拦截器，后端返回所有响应都会被这个拦截器所拦截
 axios.interceptors.response.use(success=> {
-    if (success.status && success.status == 200) {
-        if (success.data.code == 500 || success.status == 401 || success.data.code == 403) {
+    if (success.status && success.status === 200) {
+        if (success.data.code === 500 || success.status === 401 || success.data.code === 403) {
             Message.error({message: success.data.message});
             return;
         }
